@@ -54,24 +54,24 @@ export const DemandInputView: React.FC<DemandInputViewProps> = ({
   };
 
   return (
-    <div className="p-6 space-y-5 max-w-[1520px] mx-auto">
+    <div className="p-5 md:p-8 space-y-6 max-w-[1520px] mx-auto">
       {/* Header Banner */}
-      <div className="bg-white rounded-xl border border-slate-200/90 p-5 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-[22px] border border-[#E5E9EE] p-6 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-2">
-            <div className="w-2.5 h-4 bg-blue-600 rounded-xs"></div>
-            <h2 className="text-base font-bold text-slate-800 tracking-tight">
+            <div className="w-2.5 h-4 bg-[#0D6F8F] rounded-full" />
+            <h2 className="text-base font-extrabold text-[#2E2E2E] tracking-tight">
               고객사 액화질소(LN2) 수요 입력 및 계약 할당 관리
             </h2>
           </div>
-          <p className="text-xs text-slate-500 mt-1">
-            반도체, 2차전지, 제약 등 각 사업장 관할 고객사의 일일 소진 예정량을 등록하여 과부족 예측 모델에 실시간 반영합니다.
+          <p className="text-xs text-[#6B7280] mt-1 font-medium">
+            반도체, 2차전지, 제약 등 각 사업장 관할 고객사의 일일 소진 예정량을 등록하여 MS GAS 수급 예측 모델에 실시간 반영합니다.
           </p>
         </div>
 
         <button
           onClick={() => setIsModalOpen(true)}
-          className="self-start md:self-center bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs px-4 py-2.5 rounded-lg flex items-center gap-1.5 transition-colors shadow-xs cursor-pointer"
+          className="self-start md:self-center bg-[#0D6F8F] hover:bg-[#0A5770] text-white font-bold text-xs px-5 py-2.5 rounded-xl flex items-center gap-2 transition-all shadow-xs active:scale-95 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span>신규 수요처 등록</span>
@@ -79,53 +79,55 @@ export const DemandInputView: React.FC<DemandInputViewProps> = ({
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-xs">
-          <span className="text-xs text-slate-500 font-medium">조회 기준 일일 총소진량</span>
-          <div className="flex items-baseline gap-2 mt-1">
-            <span className="text-2xl font-black text-slate-900 tabular-nums">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="bg-white rounded-[22px] border border-[#E5E9EE] p-5 shadow-xs">
+          <span className="text-xs text-[#6B7280] font-medium">조회 기준 일일 총소진량</span>
+          <div className="flex items-baseline gap-2 mt-1.5">
+            <span className="text-3xl font-black text-[#2E2E2E] tabular-nums">
               {totalDemand.toFixed(1)} 톤/일
             </span>
-            <span className="text-xs text-blue-600 font-semibold">정상 배관/탱크 인입</span>
+            <span className="text-xs text-[#0D6F8F] font-bold">정상 배관/탱크 인입</span>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-xs">
-          <span className="text-xs text-slate-500 font-medium">등록 고객사 수</span>
-          <div className="flex items-baseline gap-2 mt-1">
-            <span className="text-2xl font-black text-slate-900 tabular-nums">
+        <div className="bg-white rounded-[22px] border border-[#E5E9EE] p-5 shadow-xs">
+          <span className="text-xs text-[#6B7280] font-medium">등록 고객사 수</span>
+          <div className="flex items-baseline gap-2 mt-1.5">
+            <span className="text-3xl font-black text-[#2E2E2E] tabular-nums">
               {filtered.length} 개소
             </span>
-            <span className="text-xs text-emerald-600 font-semibold">100% 정상 가동</span>
+            <span className="text-xs text-[#10B981] font-bold">100% 정상 가동</span>
           </div>
         </div>
 
-        <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-xs">
-          <span className="text-xs text-slate-500 font-medium">초고순도(반도체용) 공급 비중</span>
-          <div className="flex items-baseline gap-2 mt-1">
-            <span className="text-2xl font-black text-slate-900 tabular-nums">76.8%</span>
-            <span className="text-xs text-slate-500 font-medium">99.9999% 등급</span>
+        <div className="bg-white rounded-[22px] border border-[#E5E9EE] p-5 shadow-xs">
+          <span className="text-xs text-[#6B7280] font-medium">초고순도(반도체용) 공급 비중</span>
+          <div className="flex items-baseline gap-2 mt-1.5">
+            <span className="text-3xl font-black text-[#2E2E2E] tabular-nums">76.8%</span>
+            <span className="text-xs text-[#6B7280] font-bold">99.9999% 등급</span>
           </div>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white rounded-xl border border-slate-200/90 p-4 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
-        {/* Facility Filter Pills */}
-        <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
+      <div className="bg-white rounded-[22px] border border-[#E5E9EE] p-4 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+        {/* Facility Filter Tabs */}
+        <div className="flex items-center gap-1.5 bg-[#F6F8FA] p-1.5 rounded-xl border border-[#E5E9EE] flex-wrap">
           {[
             { id: 'ALL', label: '전체 사업장' },
             { id: '천안', label: '충남 천안' },
-            { id: '부산', label: '부산 본사' },
+            { id: '화성', label: '경기 화성' },
             { id: '청주', label: '충북 청주' },
+            { id: '부산', label: '부산 본사' },
+            { id: '동부', label: '동부 충전소' },
           ].map((tab) => (
             <button
               key={tab.id}
               onClick={() => setSelectedFacility(tab.id)}
-              className={`px-3 py-1.5 rounded-md font-semibold transition-colors cursor-pointer ${
+              className={`px-3.5 py-1.5 rounded-lg font-bold transition-all cursor-pointer ${
                 selectedFacility === tab.id
-                  ? 'bg-white text-slate-900 shadow-xs'
-                  : 'text-slate-600 hover:text-slate-900'
+                  ? 'bg-[#0D6F8F] text-white shadow-xs'
+                  : 'text-[#4B5563] hover:text-[#0D6F8F] hover:bg-white'
               }`}
             >
               {tab.label}
@@ -133,111 +135,124 @@ export const DemandInputView: React.FC<DemandInputViewProps> = ({
           ))}
         </div>
 
-        {/* Search */}
-        <div className="relative w-full md:w-72">
-          <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 transform -translate-y-1/2" />
+        {/* Search Input */}
+        <div className="relative w-full md:w-80">
+          <Search className="w-4 h-4 text-[#8A92A0] absolute left-3.5 top-1/2 transform -translate-y-1/2" />
           <input
             type="text"
-            placeholder="고객사명 또는 규격 검색..."
+            placeholder="고객사명 또는 관할 기지 검색..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 rounded-lg pl-9 pr-3 py-2 text-xs focus:ring-2 focus:ring-blue-500 focus:outline-hidden"
+            className="w-full bg-[#F6F8FA] border border-[#E5E9EE] rounded-xl pl-9 pr-4 py-2 text-xs text-[#2E2E2E] placeholder-[#8A92A0] focus:outline-hidden focus:ring-2 focus:ring-[#0D6F8F]"
           />
         </div>
       </div>
 
-      {/* Demands Table */}
-      <div className="bg-white rounded-xl border border-slate-200/90 overflow-hidden shadow-xs">
-        <table className="w-full text-left border-collapse text-xs">
-          <thead>
-            <tr className="bg-slate-50 border-b border-slate-200 text-slate-500">
-              <th className="py-3 px-4 font-semibold">고객사명</th>
-              <th className="py-3 px-3 font-semibold">공급 기지</th>
-              <th className="py-3 px-3 font-semibold">질소 규격/품명</th>
-              <th className="py-3 px-3 font-semibold text-right">일일 소진량</th>
-              <th className="py-3 px-3 font-semibold">공급 방식</th>
-              <th className="py-3 px-3 font-semibold">최근 입고 실적</th>
-              <th className="py-3 px-4 font-semibold">품질/특이사항</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100">
-            {filtered.map((d) => (
-              <tr key={d.id} className="hover:bg-slate-50 transition-colors">
-                <td className="py-3 px-4 font-bold text-slate-800">
-                  <div className="flex items-center gap-2">
-                    <Building2 className="w-4 h-4 text-blue-600 shrink-0" />
-                    <span>{d.customerName}</span>
-                  </div>
-                </td>
-                <td className="py-3 px-3 font-semibold text-slate-600">
-                  {d.facilityName}
-                </td>
-                <td className="py-3 px-3 font-medium text-slate-700">
-                  <span className="bg-slate-100 text-slate-800 px-2 py-0.5 rounded text-[11px] font-semibold">
-                    {d.productGrade}
-                  </span>
-                </td>
-                <td className="py-3 px-3 text-right font-bold text-slate-900 tabular-nums">
-                  {d.dailyDemandTons.toFixed(1)} 톤/일
-                </td>
-                <td className="py-3 px-3 text-slate-600 font-medium">
-                  {d.weeklySchedule}
-                </td>
-                <td className="py-3 px-3 text-slate-500 tabular-nums">
-                  {d.lastDelivered}
-                </td>
-                <td className="py-3 px-4 text-slate-500 text-[11px] max-w-xs truncate" title={d.specialRequirements}>
-                  {d.specialRequirements}
-                </td>
+      {/* Customer Demands List */}
+      <div className="bg-white rounded-[22px] border border-[#E5E9EE] p-6 shadow-xs">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr className="bg-[#F6F8FA] text-[#6B7280] border-b border-[#E5E9EE]">
+                <th className="py-3 px-4 font-bold rounded-l-lg">고객사명</th>
+                <th className="py-3 px-3 font-bold">관할 공급 기지</th>
+                <th className="py-3 px-3 font-bold">가스 품위 등급</th>
+                <th className="py-3 px-3 font-bold text-right">일일 수요량</th>
+                <th className="py-3 px-3 font-bold">납품 주기</th>
+                <th className="py-3 px-3 font-bold">최근 입고 상태</th>
+                <th className="py-3 px-4 font-bold rounded-r-lg">특이 요구사항</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-[#E5E9EE]">
+              {filtered.map((item) => (
+                <tr key={item.id} className="hover:bg-[#F6F8FA] transition-colors">
+                  <td className="py-3.5 px-4 font-bold text-[#2E2E2E]">
+                    <div className="flex items-center gap-2">
+                      <Building2 className="w-4 h-4 text-[#0D6F8F]" />
+                      <span>{item.customerName}</span>
+                    </div>
+                  </td>
+                  <td className="py-3.5 px-3 text-[#2E2E2E] font-medium">{item.facilityName}</td>
+                  <td className="py-3.5 px-3">
+                    <span
+                      className={`px-2.5 py-0.5 rounded-md font-bold text-[10px] ${
+                        item.productGrade.includes('초고순도')
+                          ? 'bg-[#E6F3F7] text-[#0D6F8F] border border-[#C5E5EE]'
+                          : 'bg-[#FEF9E7] text-[#D97706] border border-[#FDE68A]'
+                      }`}
+                    >
+                      {item.productGrade}
+                    </span>
+                  </td>
+                  <td className="py-3.5 px-3 text-right font-black text-[#2E2E2E] tabular-nums">
+                    {item.dailyDemandTons.toFixed(1)} 톤/일
+                  </td>
+                  <td className="py-3.5 px-3 text-[#4B5563]">{item.weeklySchedule}</td>
+                  <td className="py-3.5 px-3">
+                    <span className="inline-flex items-center gap-1 text-[#10B981] font-semibold">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#10B981]" />
+                      <span>{item.lastDelivered}</span>
+                    </span>
+                  </td>
+                  <td className="py-3.5 px-4 text-[#6B7280] font-medium max-w-xs truncate">
+                    {item.specialRequirements}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
-      {/* Add Modal */}
+      {/* Modal for adding demand */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4 animate-in fade-in">
-          <div className="bg-white rounded-2xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden">
-            <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
-              <h3 className="font-bold text-sm">신규 고객사 질소 수요 등록</h3>
-              <button onClick={() => setIsModalOpen(false)} className="text-slate-400 hover:text-white">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#101D24]/70 backdrop-blur-xs p-4 animate-in fade-in">
+          <div className="bg-white rounded-[24px] max-w-lg w-full shadow-2xl border border-[#E5E9EE] overflow-hidden">
+            <div className="px-6 py-5 bg-[#101D24] text-white flex items-center justify-between border-b border-[#1C2C35]">
+              <h3 className="font-extrabold text-base">신규 고객사 수요 등록</h3>
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center"
+              >
                 ✕
               </button>
             </div>
+
             <form onSubmit={handleSubmit} className="p-6 space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">고객사 명칭</label>
+                <label className="block text-[#2E2E2E] font-bold mb-1.5">고객사 명칭</label>
                 <input
                   type="text"
                   required
-                  placeholder="예: 현대모비스 충주 수소연료전지 공장"
+                  placeholder="예: SK하이닉스 이천공장 M16 라인"
                   value={customerName}
                   onChange={(e) => setCustomerName(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs text-slate-800"
+                  className="w-full bg-[#F6F8FA] border border-[#E5E9EE] rounded-xl p-3 text-xs text-[#2E2E2E] font-medium focus:ring-2 focus:ring-[#0D6F8F]"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3.5">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">공급 관할 기지</label>
+                  <label className="block text-[#2E2E2E] font-bold mb-1.5">공급 관할 기지</label>
                   <select
                     value={facilityName}
                     onChange={(e) => setFacilityName(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs"
+                    className="w-full bg-[#F6F8FA] border border-[#E5E9EE] rounded-xl p-2.5 text-xs font-semibold text-[#2E2E2E]"
                   >
                     <option value="충남 천안 사업장">충남 천안 사업장</option>
-                    <option value="부산 본사 (메인)">부산 본사 (메인)</option>
+                    <option value="경기 화성 공장">경기 화성 공장</option>
                     <option value="충북 청주공장">충북 청주공장</option>
+                    <option value="부산 본사 (메인)">부산 본사 (메인)</option>
+                    <option value="동부 충전소">동부 충전소</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">질소 제품 등급</label>
+                  <label className="block text-[#2E2E2E] font-bold mb-1.5">질소 제품 등급</label>
                   <select
                     value={productGrade}
                     onChange={(e) => setProductGrade(e.target.value as any)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs"
+                    className="w-full bg-[#F6F8FA] border border-[#E5E9EE] rounded-xl p-2.5 text-xs font-semibold text-[#2E2E2E]"
                   >
                     <option value="LN2 초고순도(99.9999%)">LN2 초고순도(99.9999%)</option>
                     <option value="LN2 산업용(99.99%)">LN2 산업용(99.99%)</option>
@@ -246,9 +261,9 @@ export const DemandInputView: React.FC<DemandInputViewProps> = ({
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-2 gap-3.5">
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">일일 수요량 (톤/일)</label>
+                  <label className="block text-[#2E2E2E] font-bold mb-1.5">일일 수요량 (톤/일)</label>
                   <input
                     type="number"
                     step="0.1"
@@ -256,42 +271,43 @@ export const DemandInputView: React.FC<DemandInputViewProps> = ({
                     required
                     value={dailyDemandTons}
                     onChange={(e) => setDailyDemandTons(Number(e.target.value))}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs font-bold"
+                    className="w-full bg-[#F6F8FA] border border-[#E5E9EE] rounded-xl p-2.5 text-xs font-black text-[#0D6F8F]"
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-700 font-semibold mb-1">납품 주기</label>
+                  <label className="block text-[#2E2E2E] font-bold mb-1.5">납품 주기</label>
                   <input
                     type="text"
+                    required
                     value={weeklySchedule}
                     onChange={(e) => setWeeklySchedule(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs"
+                    className="w-full bg-[#F6F8FA] border border-[#E5E9EE] rounded-xl p-2.5 text-xs font-semibold text-[#2E2E2E]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-700 font-semibold mb-1">품질 기준 및 납품 특이사항</label>
+                <label className="block text-[#2E2E2E] font-bold mb-1.5">품질 기준 및 납품 특이사항</label>
                 <input
                   type="text"
                   placeholder="예: 반도체 청정도 등급 Class 10 유지"
                   value={specialRequirements}
                   onChange={(e) => setSpecialRequirements(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-xs"
+                  className="w-full bg-[#F6F8FA] border border-[#E5E9EE] rounded-xl p-2.5 text-xs text-[#2E2E2E]"
                 />
               </div>
 
-              <div className="pt-2 flex justify-end gap-2">
+              <div className="pt-3 flex justify-end gap-2.5">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 border border-slate-200 rounded-lg text-slate-600 font-semibold"
+                  className="px-5 py-2.5 border border-[#DCE2E8] rounded-xl text-[#2E2E2E] font-bold hover:bg-[#F6F8FA]"
                 >
                   취소
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 bg-blue-600 text-white font-bold rounded-lg shadow-xs hover:bg-blue-700"
+                  className="px-6 py-2.5 bg-[#0D6F8F] text-white font-bold rounded-xl shadow-xs hover:bg-[#0A5770]"
                 >
                   수요 등록 완료
                 </button>

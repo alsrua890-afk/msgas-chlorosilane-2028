@@ -132,67 +132,68 @@ export default function App() {
       )
     );
 
-    // If destination is Cheonan, update inventory & forecast dynamically
+    // Update inventory & forecast dynamically for destination station
+    const matchedTank = tanks.find((t) => orderData.destStation.includes(t.name.slice(0, 4)) || t.name.includes(orderData.destStation.slice(0, 4)));
+    const targetFacilityId = matchedTank ? matchedTank.id : 'station-cheonan';
+
+    const addedVolume = orderData.volumeTons;
+    setTanks((prev) =>
+      prev.map((tank) => {
+        if (tank.id === targetFacilityId || orderData.destStation.includes(tank.name.slice(0, 4))) {
+          const newStock = Math.min(tank.maxCapacity, tank.currentStock + addedVolume);
+          const newDays = Math.floor(newStock / tank.dailyOutflowAvg);
+          const newPercent = +(newStock / tank.maxCapacity * 100).toFixed(1);
+          return {
+            ...tank,
+            currentStock: newStock,
+            daysRemaining: newDays,
+            fillLevelPercent: newPercent,
+            status: newDays > 5 ? 'normal' : 'warning',
+            statusLabel: newDays > 5 ? '정상 (보충 완료)' : '주의 (보충 진행)',
+            levelNote: '긴급 보충 공급 진행중',
+          };
+        }
+        return tank;
+      })
+    );
+
+    // Relieve forecast deficits
+    setForecasts((prev) =>
+      prev.map((f) => {
+        if (f.facilityId === targetFacilityId || orderData.destStation.includes(f.facilityName.slice(0, 4))) {
+          return {
+            ...f,
+            currentStock: f.currentStock + addedVolume,
+            w0: +(f.w0 + addedVolume).toFixed(1),
+            w1: +(f.w1 + addedVolume).toFixed(1),
+            w2: +(f.w2 + addedVolume).toFixed(1),
+            w3: +(f.w3 + addedVolume).toFixed(1),
+            w4: +(f.w4 + addedVolume).toFixed(1),
+            actionType: 'maintain',
+            actionLabel: '배차 진행중 (안정)',
+            status: 'normal',
+          };
+        }
+        return f;
+      })
+    );
+
+    // If Cheonan alert was pending and Cheonan is replenished
     if (orderData.destStation.includes('천안')) {
-      const addedVolume = orderData.volumeTons;
-      setTanks((prev) =>
-        prev.map((tank) => {
-          if (tank.id === 'station-cheonan') {
-            const newStock = Math.min(tank.maxCapacity, tank.currentStock + addedVolume);
-            const newDays = Math.floor(newStock / tank.dailyOutflowAvg);
-            const newPercent = +(newStock / tank.maxCapacity * 100).toFixed(1);
-            return {
-              ...tank,
-              currentStock: newStock,
-              daysRemaining: newDays,
-              fillLevelPercent: newPercent,
-              status: newDays > 5 ? 'normal' : 'warning',
-              statusLabel: newDays > 5 ? '정상 (보충 완료)' : '주의 (보충 진행)',
-              levelNote: '긴급 보충 공급 진행중',
-            };
-          }
-          return tank;
-        })
-      );
-
-      // Relieve forecast deficits
-      setForecasts((prev) =>
-        prev.map((f) => {
-          if (f.facilityId === 'station-cheonan') {
-            return {
-              ...f,
-              currentStock: f.currentStock + addedVolume,
-              w0: +(f.w0 + addedVolume).toFixed(1),
-              w1: +(f.w1 + addedVolume).toFixed(1),
-              w2: +(f.w2 + addedVolume).toFixed(1),
-              w3: +(f.w3 + addedVolume).toFixed(1),
-              w4: +(f.w4 + addedVolume).toFixed(1),
-              actionType: 'maintain',
-              actionLabel: '배차 진행중 (안정)',
-              status: 'normal',
-            };
-          }
-          return f;
-        })
-      );
-
-      // Dismiss or relieve the urgent alert
       setAlerts((prev) =>
         prev.map((a) =>
           a.id === 'alert-cheonan-5days'
             ? {
                 ...a,
                 isDismissed: true,
-                title: '[조치 완료] 천안 사업장 탱크로리 16.0톤 긴급 배차 지시 승인됨',
+                title: '[조치 완료] 천안 사업장 탱크로리 긴급 배차 지시 승인됨',
               }
             : a
         )
       );
-
-      showToast(`천안 사업장으로 탱크로리(${orderData.volumeTons}톤) 배차가 승인되어 수급 전망이 정상화되었습니다.`);
-    } else {
-      showToast(`${orderData.destStation}으로 ${orderData.volumeTons}톤 배차 지시서가 발행되었습니다.`);
     }
+
+    showToast(`${orderData.destStation}으로 탱크로리(${orderData.volumeTons}톤) 배차가 승인되어 수급 전망이 정상화되었습니다.`);
   };
 
   // 3. Complete Dispatch Order
@@ -278,7 +279,7 @@ export default function App() {
   const unreportedCount = unreported.filter((u) => u.status === 'pending').length;
 
   return (
-    <div className="min-h-screen bg-[#f1f5f9] flex text-slate-900 font-sans">
+    <div className="min-h-screen bg-[#F6F8FA] flex text-[#2E2E2E] font-sans">
       {/* 1. Left Sidebar */}
       <Sidebar
         currentTab={currentTab}
@@ -426,9 +427,9 @@ export default function App() {
 
       {/* Global Toast */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 bg-slate-900 text-white text-xs px-4 py-3 rounded-lg shadow-2xl flex items-center gap-2 z-50 animate-in fade-in slide-in-from-bottom-2 border border-slate-700">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-          <span>{toastMessage}</span>
+        <div className="fixed bottom-6 right-6 bg-[#2E2E2E] text-white text-xs px-5 py-3.5 rounded-xl shadow-2xl flex items-center gap-2.5 z-50 animate-in fade-in slide-in-from-bottom-2 border border-[#444950]">
+          <CheckCircle2 className="w-4 h-4 text-[#10B981] shrink-0" />
+          <span className="font-semibold">{toastMessage}</span>
         </div>
       )}
     </div>

@@ -1,12 +1,118 @@
 @import "tailwindcss";
 
 @layer base {
+  :root {
+    --ms-primary: #0D6F8F;
+    --ms-primary-hover: #0A5770;
+    --ms-primary-light: #E6F3F7;
+    --ms-primary-tint: #C5E5EE;
+    --ms-secondary: #F8D94F;
+    --ms-secondary-hover: #F3CE34;
+    --ms-secondary-light: #FEF9E7;
+    --ms-tertiary: #2E2E2E;
+    --ms-neutral: #F6F8FA;
+    --ms-border: #E5E9EE;
+    --ms-border-strong: #DCE2E8;
+    --ms-card-bg: #FFFFFF;
+    --ms-text-main: #2E2E2E;
+    --ms-text-muted: #6B7280;
+    --ms-text-subtle: #8A92A0;
+    --ms-danger: #E05342;
+    --ms-danger-light: #FDE8E6;
+    --ms-success: #10B981;
+    --ms-success-light: #E8F9F3;
+  }
+
   body {
-    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    background-color: #F6F8FA;
+    color: #2E2E2E;
+    font-family: "Hanken Grotesk", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     letter-spacing: -0.015em;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+}
+
+/* MS GAS Brand UI Components */
+.ms-card {
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  border: 1px solid #E5E9EE;
+  box-shadow: 0 1px 3px rgba(13, 111, 143, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ms-card:hover {
+  border-color: #C5E5EE;
+}
+
+/* MS Primary Teal Button */
+.ms-btn-primary {
+  background-color: #0D6F8F;
+  color: #FFFFFF;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all 0.15s ease-out;
+}
+.ms-btn-primary:hover {
+  background-color: #0A5770;
+}
+.ms-btn-primary:active {
+  transform: scale(0.98);
+}
+
+/* MS Secondary Yellow Button */
+.ms-btn-secondary {
+  background-color: #F8D94F;
+  color: #2E2E2E;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all 0.15s ease-out;
+}
+.ms-btn-secondary:hover {
+  background-color: #F3CE34;
+}
+.ms-btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* MS Outline Button */
+.ms-btn-outline {
+  background-color: #FFFFFF;
+  color: #0D6F8F;
+  border: 1.5px solid #0D6F8F;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all 0.15s ease-out;
+}
+.ms-btn-outline:hover {
+  background-color: #E6F3F7;
+}
+
+/* MS Dark / Charcoal Button */
+.ms-btn-dark {
+  background-color: #2E2E2E;
+  color: #FFFFFF;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: all 0.15s ease-out;
+}
+.ms-btn-dark:hover {
+  background-color: #1A1A1A;
+}
+
+/* MS Ghost / Subtle Button */
+.ms-btn-ghost {
+  background-color: #F6F8FA;
+  color: #2E2E2E;
+  border: 1px solid #E5E9EE;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all 0.15s ease-out;
+}
+.ms-btn-ghost:hover {
+  background-color: #EBF0F5;
 }

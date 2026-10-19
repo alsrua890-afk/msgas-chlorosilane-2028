@@ -20,59 +20,65 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-slate-900/40 backdrop-blur-xs animate-in fade-in">
-      <div className="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between border-l border-slate-200">
+    <div className="fixed inset-0 z-50 flex justify-end bg-[#101D24]/50 backdrop-blur-xs animate-in fade-in">
+      <div className="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between border-l border-[#E5E9EE]">
         {/* Header */}
         <div>
-          <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-900 text-white">
-            <div className="flex items-center gap-2">
-              <Bell className="w-4 h-4 text-amber-400" />
-              <h3 className="font-bold text-sm">관제 알림 센터</h3>
-              <span className="bg-red-500 text-white text-[11px] font-bold px-1.5 py-0.2 rounded-full">
+          <div className="p-5 border-b border-[#1C2C35] flex items-center justify-between bg-[#101D24] text-white">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-[#0D6F8F] flex items-center justify-center text-white">
+                <Bell className="w-4 h-4" />
+              </div>
+              <h3 className="font-extrabold text-base">관제 알림 센터</h3>
+              <span className="bg-[#E05342] text-white text-[11px] font-black px-2 py-0.5 rounded-md">
                 {alerts.filter((a) => !a.isDismissed).length}
               </span>
             </div>
             <button
               onClick={onClose}
-              className="text-slate-400 hover:text-white p-1 rounded transition-colors"
+              className="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
 
           {/* List */}
-          <div className="p-4 space-y-3 overflow-y-auto max-h-[calc(100vh-140px)] text-xs">
+          <div className="p-5 space-y-3.5 overflow-y-auto max-h-[calc(100vh-140px)] text-xs">
             {alerts.length === 0 ? (
-              <div className="py-12 text-center text-slate-400">
+              <div className="py-16 text-center text-[#8A92A0] font-medium">
                 수신된 새로운 관제 경보가 없습니다.
               </div>
             ) : (
               alerts.map((alert) => (
                 <div
                   key={alert.id}
-                  className={`p-3.5 rounded-xl border transition-all ${
+                  className={`p-4 rounded-xl border transition-all ${
                     alert.isDismissed
-                      ? 'bg-slate-50 border-slate-200 opacity-60'
+                      ? 'bg-[#F6F8FA] border-[#E5E9EE] opacity-60'
                       : alert.level === 'priority_1'
-                      ? 'bg-red-50/80 border-red-200'
-                      : 'bg-blue-50/80 border-blue-200'
+                      ? 'bg-[#FFF5F5] border-[#FCA5A5]'
+                      : 'bg-[#E6F3F7] border-[#C5E5EE]'
                   }`}
                 >
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex items-start gap-2">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="flex items-start gap-2.5">
                       {alert.level === 'priority_1' ? (
-                        <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+                        <div className="w-7 h-7 rounded-lg bg-[#E05342] text-white flex items-center justify-center shrink-0 mt-0.5">
+                          <AlertTriangle className="w-3.5 h-3.5" />
+                        </div>
                       ) : (
-                        <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                        <div className="w-7 h-7 rounded-lg bg-[#0D6F8F] text-white flex items-center justify-center shrink-0 mt-0.5">
+                          <Info className="w-3.5 h-3.5" />
+                        </div>
                       )}
                       <div>
-                        <div className="font-bold text-slate-800 text-xs">
+                        <div className="font-bold text-[#2E2E2E] text-xs">
                           {alert.title}
                         </div>
-                        <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">
+                        <p className="text-[11px] text-[#4B5563] mt-1.5 leading-relaxed font-medium">
                           {alert.description}
                         </p>
-                        <div className="text-[10px] text-slate-400 mt-1.5 tabular-nums">
+                        <div className="text-[10px] text-[#8A92A0] mt-2 tabular-nums font-semibold">
                           {alert.timestamp}
                         </div>
                       </div>
@@ -82,7 +88,7 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
                       <button
                         onClick={() => onDismissAlert(alert.id)}
                         title="확인 완료"
-                        className="text-slate-400 hover:text-slate-700 p-1 rounded"
+                        className="w-7 h-7 rounded-lg border border-[#DCE2E8] hover:bg-black/5 flex items-center justify-center text-[#6B7280] hover:text-[#2E2E2E] transition-colors shrink-0"
                       >
                         <Check className="w-3.5 h-3.5" />
                       </button>
@@ -94,18 +100,18 @@ export const NotificationDrawer: React.FC<NotificationDrawerProps> = ({
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="p-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between text-xs">
+        {/* Footer Actions */}
+        <div className="p-4 border-t border-[#E5E9EE] bg-[#F6F8FA] flex items-center justify-between">
           <button
             onClick={onClearAll}
-            className="text-slate-500 hover:text-red-600 flex items-center gap-1 font-semibold"
+            className="text-xs text-[#6B7280] hover:text-[#E05342] font-semibold flex items-center gap-1.5 cursor-pointer transition-colors"
           >
             <Trash2 className="w-3.5 h-3.5" />
-            <span>모든 알림 읽음 처리</span>
+            <span>모든 알림 확인 처리</span>
           </button>
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800"
+            className="px-4 py-2 bg-[#0D6F8F] hover:bg-[#0A5770] text-white font-bold text-xs rounded-xl transition-all cursor-pointer shadow-xs active:scale-95"
           >
             닫기
           </button>
