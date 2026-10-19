@@ -1,0 +1,6 @@
+{
+  "name": "MS GAS 질소 수급 관제 시스템",
+  "description": "실시간 액화질소(LN2) 저장 잔량 모니터링, 주차별 수급 과부족 예측 및 탱크로리 배차 관제 시스템",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
